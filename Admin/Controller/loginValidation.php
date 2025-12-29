@@ -17,6 +17,20 @@ if(!$password){
     $errors["password"] = "Password field is required";
 }
 
+<script>
+  const pass = document.getElementById("password");
+  const msg = document.getElementById("passMsg");
+
+  pass.addEventListener("input", () => {
+    if (pass.value.length < 8) {
+      msg.innerText = "Password must be at least 8 characters";
+    } else {
+      msg.innerText = "";
+    }
+  });
+</script>
+
+
 if(count($errors) > 0){
     if($errors["email"]){
         $_SESSION["emailErr"] = $errors["email"];

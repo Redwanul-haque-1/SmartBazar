@@ -26,38 +26,40 @@ unset($_SESSION["LoginErr"]);
 
 
 <form method="post" action="..\Controller\signUpValidation.php" enctype="multipart/form-data">
-    <table >
+    <label>Name</label>
+  <input type="text" name="name" required>
 
-    <tr>
+  <label>Email</label>
+  <input type="email" name="email" required>
 
-    <td>
-        Email
-    </td>
-     <td><input type="text" id="email" name="email" value="<?php echo $previousValues['email'] ?? '' ?>" onkeyup="findExistingEmail()"/> </td>
-    <td id="erroremail"></td>
-    <td>
-      <?php echo $emailErr;?>
-    </td>
-    </tr>
-    <tr>
-        <td>Password</td>
-        <td><input type="password" id="password" name="password"/> </td>
-       <td>  <?php echo $passErr;?></td>
-    </tr>
-    <tr>
-        <td>Upload File</td>
-        <td><input type="file" id="fileUpload" name="fileUpload"/>
-    </tr>
-    <tr>
-        <td></td>
-        <td>
-            <?php echo $loginErr; ?>
-        </td>
-    </tr>
-    <tr>
-       <td> <input type="submit" name="signup" value="Sign Up"/></td>
-    </tr>
-    </table>
+  <label>Password</label>
+  <input type="password" id="password" name="password" required>
+
+  <small id="passMsg" style="color:red;"></small>
+
+  <label>Phone</label>
+  <input type="text" name="phone">
+
+  <label>Address</label>
+  <textarea name="address"></textarea>
+
+  <label>Gender</label>
+  <select name="gender" required>
+    <option>Male</option>
+    <option>Female</option>
+    <option>Other</option>
+  </select>
+
+  <label>Date of Birth</label>
+  <input type="date" name="dob">
+
+  <label>Profile Picture</label>
+  <input type="file" name="profile_image" accept="image/*">
+
+  <input type="hidden" name="role" value="Customer">
+
+  <button type="submit">Register</button>
+
 </form>
 </body>
 </html>
