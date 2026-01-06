@@ -53,7 +53,7 @@ $myReview = $my->fetch(PDO::FETCH_ASSOC);
 
 <div class="card">
   <?php if($product['image']): ?>
-    <img src="../public/uploads/<?= $product['image'] ?>" width="200"><br>
+    <img src="../../Seller/public/uploads/<?= $product['image'] ?>" width="200"><br>
   <?php endif; ?>
 
   <b>Seller:</b> <?= htmlspecialchars($product['seller']) ?><br>
