@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 120vh;
+    display: flex;
+    justify-content: center;   
+    align-items: center;       
+    font-family: Arial, sans-serif;
+}
+
+.register-box {
+    width: 600px;
+    padding: 60px;
+    border: 1px solid #f30909;
+    border-radius: 15px;
+}
+
+/* Heading */
+h2 {
+    margin-bottom: 15px;
+    font-size: 35px;
+}
+
+/* Labels */
+label {
+    display: block;
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+/* Inputs, select, textarea */
+input,
+select,
+textarea {
+    width: 100%;
+    margin-top: 5px;
+    padding: 6px;
+    font-size: 18px;
+}
+
+/* Button */
+button {
+    margin-top: 15px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* Links */
+.register-box a {
+    margin-top: 10px;
+    text-decoration: none;
+    color: purple;
+    font-size: 20px;
+}
+a:hover {
+    text-decoration: underline;
+}
