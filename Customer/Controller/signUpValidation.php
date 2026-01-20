@@ -1,5 +1,5 @@
 <?php
-include "../Model/DatabaseConnection.php";
+include "../../Common/DatabaseConnection.php";
 session_start();
 
 error_reporting(E_ALL);

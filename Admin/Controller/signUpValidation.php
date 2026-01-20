@@ -1,68 +1,43 @@
-<?php
-include "../Model/DatabaseConnection.php";
-session_start();
+<?php session_start();
+require_once("../../Common/DatabaseConnection.php");
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-$email = $_REQUEST["email"];
-$password = $_REQUEST["password"];
-$uploadFile = $_FILES["fileUpload"];
-$errors = [];
-$values = [];
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-if(!$email){
-$errors["email"] = "Email field is required";
+    $name = trim($_POST['name']);
+    $email = strtolower(trim($_POST['email']));
+    $password = $_POST['password'];
+    $phone = $_POST['phone'] ?? "";
+    $address = $_POST['address'] ?? "";
+    $gender = $_POST['gender'];
+    $dob = $_POST['dob'] ?? null;
+    $role = $_POST['role'];
+
+    if (empty($email)) die("Email is required");
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) die("Invalid email format");
+
+    $sql = "SELECT id FROM users WHERE LOWER(email)=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$email]);
+    if ($stmt->rowCount() > 0) die("Email already registered");
+
+    $imgName = null;
+    if (!empty($_FILES['profile_image']['name'])) {
+        $file = $_FILES['profile_image'];
+        if ($file['size'] > 2000000) die("Image too large");
+        $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+        $imgName = time() . "_" . rand(100,999) . "." . $ext;
+        move_uploaded_file($file['tmp_name'], "../public/uploads/".$imgName);
+    }
+
+    $hash = password_hash($password, PASSWORD_DEFAULT);
+    $status = ($role === "Seller") ? "Pending" : "Approved";
+
+    $sql = "INSERT INTO users 
+    (name,email,phone,address,gender,dob,profile_image,password_hash,role,status)
+    VALUES (?,?,?,?,?,?,?,?,?,?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$name,$email,$phone,$address,$gender,$dob,$imgName,$hash,$role,$status]);
+
+    echo "Registration successful. <a href='../../Common/login.php'>Login</a>";
 }
-
-if(!$password){
-    $errors["password"] = "Password field is required";
-}
-
-if(count($errors) > 0){
-    if($errors["email"]){
-        $_SESSION["emailErr"] = $errors["email"];
-    }
-    else{
-       if($_SESSION["emailErr"]){
-         unset($_SESSION["emailErr"]);
-       }
-    }
-
-    if($errors["password"]){
-        $_SESSION["passwordErr"] = $errors["password"];
-    }
-
-$values["email"] = $email;
-$_SESSION["previousValues"] = $values;
-
-Header("Location: ..\View\login.php");
-
-}else{
-    $path = "";
-    if($uploadFile){
-        $targetDir = "../uploads/";
-        $path = $targetDir . basename($uploadFile["name"]);
-        move_uploaded_file($uploadFile["tmp_name"], $path);
-    
-    }
-
-    // $data = ["email"=> "test@test.com","password"=> 'password'];
-    $db = new DatabaseConnection();
-    $connection = $db->openConnection();
-    $result = $db->signup($connection, "users", $email, $password, $path);
-
-    if($result){
-        Header("Location: ..\View\login.php");
-
-    }else{
-      $_SESSION["LoginErr"] = "Failed to sign up, please try again later";  
-      Header("Location: ..\View\signup.php");
-      unset($_SESSION["emailErr"]);
-      unset($_SESSION["passwordErr"]);
-    }
-
-
-    
-}
-
 ?>

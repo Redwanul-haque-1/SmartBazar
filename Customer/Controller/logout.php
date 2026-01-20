@@ -5,7 +5,7 @@ session_start();
 session_destroy();
 
 
-Header("Location: ..\View\login.php");
+Header("Location: ../../Common/login.php");
 
 
 ?>
