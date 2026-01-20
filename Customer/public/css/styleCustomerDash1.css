@@ -1,0 +1,93 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Page */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding: 20px;
+}
+
+/* Headings */
+h2 {
+    margin-bottom: 10px;
+    font-size: 30px;
+}
+
+/* Menu */
+ul {
+    margin: 10px 0;
+    padding-left: 20px;
+    font-size: 20px;
+}
+
+ul li {
+    margin-bottom: 5px;
+}
+
+a {
+    text-decoration: none;
+    margin-right: 10px;
+    
+}
+
+/* Logout link spacing */
+body > a {
+    display: inline-block;
+    margin: 10px 0;
+    font-size: 20px;
+}
+
+/* Product cards */
+.card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    width: 250px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+/* Product image */
+.card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    margin-bottom: 5px;
+}
+
+/* Card text spacing */
+.card b {
+    display: inline-block;
+    margin-bottom: 4px;
+}
+
+/* Description box */
+.card div {
+    margin-top: 5px;
+}
+
+/* Forms */
+.card form {
+    margin-top: 5px;
+}
+
+/* Inputs */
+input[type="number"] {
+    width: 60px;
+    padding: 4px;
+}
+
+/* Buttons */
+button {
+    padding: 4px 8px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+
+
