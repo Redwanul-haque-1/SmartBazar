@@ -1,20 +1,17 @@
 <?php
 session_start();
-if(!isset($_SESSION['user_id'])){
+if(!isset($_SESSION['role']) || $_SESSION['role'] !== "Admin"){
     die("Unauthorized");
 }
 
 require_once("../../Common/DatabaseConnection.php");
 
-$id = $_SESSION['user_id'];
+$id = $_POST['id'];
 
 $sql = "DELETE FROM users WHERE id=?";
 $stmt = $conn->prepare($sql);
 $stmt->execute([$id]);
 
-session_unset();
-session_destroy();
-
-header("Location: ../../Common/login.php");
+header("Location: ../View/manageUsers.php");
 exit;
 ?>
